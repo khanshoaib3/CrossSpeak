@@ -6,17 +6,17 @@ namespace CrossSpeak
 {
     internal class ScreenReaderMac : IScreenReader
     {
-        void IScreenReader.Close()
+        public void Initialize()
         {
             throw new NotImplementedException();
         }
 
-        void IScreenReader.Initialize()
+        public bool Say(string text, bool interrupt)
         {
             throw new NotImplementedException();
         }
 
-        bool IScreenReader.Say(string text, bool interrupt)
+        public void Close()
         {
             throw new NotImplementedException();
         }

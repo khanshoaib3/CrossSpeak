@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>CrossSpeak</id>
+    <version>1.0.0</version>
+    <title>Cross Speak</title>
+    <authors>Mohammad Shoaib Khan</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">LGPL-2.1-only</license>
+    <!-- <icon>icon.png</icon> -->
+    <projectUrl>https://github.com/khanshoaib3/CrossSpeak/</projectUrl>
+    <description>A cross platform screen reader interfacing libraray.</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2024</copyright>
+    <tags>Tag1 Tag2</tags>
+	<dependencies>
+		<dependency id="System.Runtime.Loader" version="4.3.0" />
+	</dependencies>
+	<references>
+		<reference file="CrossSpeak.dll"></reference>
+		<reference file="TolkDotNet.dll"></reference>
+	</references>
+	<contentFiles>
+		<files include="**\screen-reader-libs\windows\*.*" buildAction="None" copyToOutput="true"/>
+		<files include="**\screen-reader-libs\linux\*.*" buildAction="None" copyToOutput="true"/>
+		<files include="**\screen-reader-libs\macos\*.*" buildAction="None" copyToOutput="true"/>
+	</contentFiles>
+  </metadata>
+  <files>
+	<file src="lib\windows\*.*" target="contentFiles\any\any\screen-reader-libs\windows" />
+	<file src="lib\linux\*.*" target="contentFiles\any\any\screen-reader-libs\linux" />
+	<file src="lib\macos\*.*" target="contentFiles\any\any\screen-reader-libs\macos" />
+	<file src="lib\TolkDotNet.dll" target="lib\netstandard2.1" />
+	<file src="bin\Debug\netstandard2.1\CrossSpeak.dll" target="lib\netstandard2.1" />
+  </files>
+</package>

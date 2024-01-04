@@ -5,6 +5,13 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>CrossSpeak</Title>
+	<Description>Test</Description>
+	<NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+	<Reference Include="lib/TolkDotNet.dll" />
+  </ItemGroup>
 
 </Project>

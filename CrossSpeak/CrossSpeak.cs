@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace CrossSpeak
 {
-    public class MainClass
+    public class CrossSpeak
     {
         private static IScreenReader? _instance;
 

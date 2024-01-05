@@ -31,8 +31,7 @@ namespace CrossSpeak
 
     internal class ScreenReaderLinux : IScreenReader
     {
-
-        private bool initialized = false, resolvedDll = false;
+        private bool initialized = false;
         private IntPtr libraryHandle;
 
         public void Initialize()
@@ -58,7 +57,7 @@ namespace CrossSpeak
             }
         }
 
-        public bool Say(string text, bool interrupt)
+        public bool Speak(string text, bool interrupt = true)
         {
             if (string.IsNullOrWhiteSpace(text)) return false;
             if (!initialized && libraryHandle == IntPtr.Zero) return false;
@@ -80,11 +79,62 @@ namespace CrossSpeak
             }
         }
 
+        public bool IsLoaded()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string? DetectScreenReader()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasSpeech()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Output(string text, bool interrupt)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsSpeaking()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TrySAPI(bool trySAPI)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PreferSAPI(bool preferSAPI)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasBraille()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Braille(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Silence()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Close()
         {
             if (initialized && libraryHandle != IntPtr.Zero)
             {
                 LibSpeechdWrapperAPI.Close();
+                dlclose(libraryHandle);
                 initialized = false;
                 libraryHandle = IntPtr.Zero;
             }

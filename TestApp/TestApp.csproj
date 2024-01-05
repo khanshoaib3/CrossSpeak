@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CrossSpeak" Version="1.0.14" />
+    <PackageReference Include="CrossSpeak" Version="1.0.16" />
   </ItemGroup>
 
 </Project>

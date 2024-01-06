@@ -16,7 +16,8 @@ namespace CrossSpeak
 
         public void Initialize()
         {
-            string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+            if (assemblyDirectory == String.Empty) return;
             string dllDirectory = Path.Combine(assemblyDirectory, "screen-reader-libs", "windows");
             Console.WriteLine(dllDirectory);
             // Call SetDllDirectory to change the DLL search path
@@ -46,9 +47,9 @@ namespace CrossSpeak
 
         public string? DetectScreenReader() => isLoaded ? Tolk.DetectScreenReader() : null;
 
-        public bool HasSpeech() => isLoaded ? Tolk.HasSpeech() : false;
+        public bool HasSpeech() => isLoaded && Tolk.HasSpeech();
 
-        public bool HasBraille() => isLoaded ? Tolk.HasBraille() : false;
+        public bool HasBraille() => isLoaded && Tolk.HasBraille();
 
         public bool Speak(string text, bool interrupt = false)
         {
@@ -107,9 +108,9 @@ namespace CrossSpeak
             }
         }
 
-        public bool IsSpeaking() => isLoaded ? Tolk.IsSpeaking() : false;
+        public bool IsSpeaking() => isLoaded && Tolk.IsSpeaking();
 
-        public bool Silence() => isLoaded ? Tolk.Silence() : false;
+        public bool Silence() => isLoaded && Tolk.Silence();
 
         public void Close()
         {

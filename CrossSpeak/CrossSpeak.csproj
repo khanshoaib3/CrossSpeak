@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
 	<Reference Include="lib/TolkDotNet.dll" />
   </ItemGroup>
 

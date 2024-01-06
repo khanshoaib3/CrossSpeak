@@ -13,12 +13,9 @@
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2024</copyright>
     <tags>Tag1 Tag2</tags>
-	<dependencies>
-		<dependency id="System.Runtime.Loader" version="4.3.0" />
-	</dependencies>
 	<references>
-		<reference file="CrossSpeak.dll"></reference>
-		<reference file="TolkDotNet.dll"></reference>
+		<reference file="CrossSpeak.dll"/>
+		<reference file="TolkDotNet.dll"/>
 	</references>
 	<contentFiles>
 		<files include="**\screen-reader-libs\windows\*.*" buildAction="None" copyToOutput="true"/>

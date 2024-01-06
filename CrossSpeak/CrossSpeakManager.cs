@@ -29,8 +29,6 @@ namespace CrossSpeak
                     {
                         throw new Exception("Platform not supported!!");
                     }
-
-                    _instance.Initialize();
                 }
 
                 return _instance;

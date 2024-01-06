@@ -1,11 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace CrossSpeak
 {
-    internal class LibSpeechdWrapperAPI
+    internal static class LibSpeechdWrapperAPI
     {
         internal readonly struct GoString
         {
@@ -19,36 +17,28 @@ namespace CrossSpeak
             }
         }
 
-        [DllImport("libspeechdwrapper")]
+        [DllImport("screen-reader-libs/linux/libspeechdwrapper.so")]
         internal static extern int Initialize();
 
-        [DllImport("libspeechdwrapper")]
+        [DllImport("screen-reader-libs/linux/libspeechdwrapper.so")]
         internal static extern int Speak(GoString text, bool interrupt);
 
-        [DllImport("libspeechdwrapper")]
+        [DllImport("screen-reader-libs/linux/libspeechdwrapper.so")]
         internal static extern int Close();
     }
 
     internal class ScreenReaderLinux : IScreenReader
     {
-        private bool initialized = false;
-        private IntPtr libraryHandle;
+        private bool _initialized;
 
         public void Initialize()
         {
             Console.WriteLine("Initializing speech dispatcher...");
-            string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string dllDirectory = Path.Combine(assemblyDirectory, "screen-reader-libs", "linux", "libspeechdwrapper.so");
-            libraryHandle = dlopen(dllDirectory, RTLD_NOW);
-            if (libraryHandle == IntPtr.Zero)
-            {
-                throw new Exception($"Failed to load the shared library: {dllDirectory}");
-            }
-
+            
             int res = LibSpeechdWrapperAPI.Initialize();
             if (res == 1)
             {
-                initialized = true;
+                _initialized = true;
                 Console.WriteLine("Successfully initialized.");
             }
             else
@@ -60,7 +50,7 @@ namespace CrossSpeak
         public bool Speak(string text, bool interrupt = true)
         {
             if (string.IsNullOrWhiteSpace(text)) return false;
-            if (!initialized && libraryHandle == IntPtr.Zero) return false;
+            if (!_initialized) return false;
 
             LibSpeechdWrapperAPI.GoString str = new LibSpeechdWrapperAPI.GoString(text, text.Length);
             int re = LibSpeechdWrapperAPI.Speak(str, interrupt);
@@ -79,75 +69,31 @@ namespace CrossSpeak
             }
         }
 
-        public bool IsLoaded()
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsLoaded() => _initialized;
 
-        public string? DetectScreenReader()
-        {
-            throw new NotImplementedException();
-        }
+        public string? DetectScreenReader() => null;
 
-        public bool HasSpeech()
-        {
-            throw new NotImplementedException();
-        }
+        public bool HasSpeech() => false;
 
-        public bool Output(string text, bool interrupt)
-        {
-            throw new NotImplementedException();
-        }
+        public bool Output(string text, bool interrupt) => Speak(text, interrupt) || Braille(text);
 
-        public bool IsSpeaking()
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsSpeaking() => false;
 
-        public void TrySAPI(bool trySAPI)
-        {
-            throw new NotImplementedException();
-        }
+        public void TrySAPI(bool trySAPI) { }
 
-        public void PreferSAPI(bool preferSAPI)
-        {
-            throw new NotImplementedException();
-        }
+        public void PreferSAPI(bool preferSAPI) { }
 
-        public bool HasBraille()
-        {
-            throw new NotImplementedException();
-        }
+        public bool HasBraille() => false;
 
-        public bool Braille(string text)
-        {
-            throw new NotImplementedException();
-        }
+        public bool Braille(string text) => false;
 
-        public bool Silence()
-        {
-            throw new NotImplementedException();
-        }
+        public bool Silence() => false;
 
         public void Close()
         {
-            if (initialized && libraryHandle != IntPtr.Zero)
-            {
-                LibSpeechdWrapperAPI.Close();
-                dlclose(libraryHandle);
-                initialized = false;
-                libraryHandle = IntPtr.Zero;
-            }
+            if (!_initialized) return;
+            LibSpeechdWrapperAPI.Close();
+            _initialized = false;
         }
-
-
-        // Declare dlopen and dlclose functions from dl library
-        private const int RTLD_NOW = 2; // for dlopen's flags
-
-        [DllImport("libdl")]
-        private static extern IntPtr dlopen(string path, int flags);
-
-        [DllImport("libdl")]
-        private static extern int dlclose(IntPtr handle);
     }
 }

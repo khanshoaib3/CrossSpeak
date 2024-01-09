@@ -14,14 +14,17 @@ namespace CrossSpeak
 
         private bool isLoaded = false;
 
-        public void Initialize()
+        public ScreenReaderWindows()
         {
             string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
-            if (assemblyDirectory == String.Empty) return;
+            if (assemblyDirectory == string.Empty) return;
             string dllDirectory = Path.Combine(assemblyDirectory, "screen-reader-libs", "windows");
-            Console.WriteLine(dllDirectory);
             // Call SetDllDirectory to change the DLL search path
             SetDllDirectory(dllDirectory);
+        }
+
+        public void Initialize()
+        {
             Console.WriteLine("Initializing Tolk...");
             Tolk.Load();
 
@@ -56,17 +59,17 @@ namespace CrossSpeak
             if (string.IsNullOrWhiteSpace(text)) return false;
             if (!isLoaded) return false;
 
-            if (!Tolk.Speak(text, interrupt))
-            {
-                Console.WriteLine($"Failed to output text: {text}");
-                return false;
-            }
-            else
+            if (Tolk.Speak(text, interrupt))
             {
 #if DEBUG
                 Console.WriteLine($"Speaking(interrupt: {interrupt}) = {text}");
 #endif
                 return true;
+            }
+            else
+            {
+                Console.WriteLine($"Failed to output text: {text}");
+                return false;
             }
         }
 
@@ -75,17 +78,17 @@ namespace CrossSpeak
             if (string.IsNullOrWhiteSpace(text)) return false;
             if (!isLoaded) return false;
 
-            if (!Tolk.Braille(text))
-            {
-                Console.WriteLine($"Failed to output text: {text}");
-                return false;
-            }
-            else
+            if (Tolk.Braille(text))
             {
 #if DEBUG
                 Console.WriteLine($"Braille: {text}");
 #endif
                 return true;
+            }
+            else
+            {
+                Console.WriteLine($"Failed to output text: {text}");
+                return false;
             }
         }
 
@@ -94,17 +97,17 @@ namespace CrossSpeak
             if (string.IsNullOrWhiteSpace(text)) return false;
             if (!isLoaded) return false;
 
-            if (!Tolk.Output(text, interrupt))
-            {
-                Console.WriteLine($"Failed to output text: {text}");
-                return false;
-            }
-            else
+            if (Tolk.Output(text, interrupt))
             {
 #if DEBUG
                 Console.WriteLine($"Speaking(interrupt: {interrupt}) = {text}");
 #endif
                 return true;
+            }
+            else
+            {
+                Console.WriteLine($"Failed to output text: {text}");
+                return false;
             }
         }
 

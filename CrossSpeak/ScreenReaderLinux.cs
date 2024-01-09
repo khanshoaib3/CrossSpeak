@@ -55,17 +55,17 @@ namespace CrossSpeak
             LibSpeechdWrapperAPI.GoString str = new LibSpeechdWrapperAPI.GoString(text, text.Length);
             int re = LibSpeechdWrapperAPI.Speak(str, interrupt);
 
-            if (re != 1)
-            {
-                Console.WriteLine($"Failed to output text: {text}");
-                return false;
-            }
-            else
+            if (re == 1)
             {
 #if DEBUG
                 Console.WriteLine($"Speaking(interrupt: {interrupt}) = {text}");
 #endif
                 return true;
+            }
+            else
+            {
+                Console.WriteLine($"Failed to output text: {text}");
+                return false;
             }
         }
 

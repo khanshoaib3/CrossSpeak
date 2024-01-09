@@ -12,7 +12,7 @@
     <description>A cross platform screen reader interfacing libraray.</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2024</copyright>
-    <tags>Tag1 Tag2</tags>
+    <tags>tts screen-reader nvda sapi jaws accessibility</tags>
 	<references>
 		<reference file="CrossSpeak.dll"/>
 		<reference file="TolkDotNet.dll"/>

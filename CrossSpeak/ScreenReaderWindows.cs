@@ -18,7 +18,7 @@ namespace CrossSpeak
         {
             string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
             if (assemblyDirectory == string.Empty) return;
-            string dllDirectory = Path.Combine(assemblyDirectory, "screen-reader-libs", "windows");
+            string dllDirectory = Path.Combine(assemblyDirectory, "lib", "screen-reader-libs", "windows");
             // Call SetDllDirectory to change the DLL search path
             SetDllDirectory(dllDirectory);
         }

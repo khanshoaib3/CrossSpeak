@@ -11,92 +11,92 @@ namespace CrossSpeak
         {
             #region Speaker
             
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void init_speaker();
 #pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
 #pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
             internal static extern void speak(String text);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_voice(Int32 index);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern UInt32 available_voices_count();
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_language(Int32 index);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern UInt32 available_languages_count();
 #pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
 #pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
             internal static extern void get_voice_name(UInt32 idx, String pszOut);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_volume(Single volume);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern Single get_volume();
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_rate(Single rate);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern Single get_rate();
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void stop();
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void cleanup_speaker();
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void mainloop_speaker(IntPtr speaker);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern Boolean is_speaking(IntPtr speaker);
 
             #endregion
 
             #region Speaker OO
 
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern IntPtr make_speaker();
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl)]
             internal static extern void speak_with(IntPtr speaker, [MarshalAs(UnmanagedType.LPUTF8Str)] String text);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_voice_with(IntPtr speaker, Int32 index);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_volume_with(IntPtr speaker, Single volume);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern Single get_volume_with(IntPtr speaker);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_rate_with(IntPtr speaker, Single rate);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern Single get_rate_with(IntPtr speaker);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void stop_with(IntPtr speaker);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void cleanup_with(IntPtr speaker);
 
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void register_will_speak_word_callback(IntPtr speaker, [MarshalAs(UnmanagedType.FunctionPtr)] wsw_callback cb);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void register_will_speak_phoneme_callback(IntPtr speaker, [MarshalAs(UnmanagedType.FunctionPtr)] wsp_callback cb);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void register_did_finish_speaking_callback(IntPtr speaker, [MarshalAs(UnmanagedType.FunctionPtr)] dfs_callback cb);
 
             #endregion
 
             #region Recognizer OO
 
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern IntPtr make_listener();
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void start_listening(IntPtr listener);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void stop_listening(IntPtr listener);
 #pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
 #pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
             internal static extern void add_command(IntPtr listener, String command);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void cleanup_listener(IntPtr listener);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void mainloop_listener(IntPtr listener);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern Boolean is_listening(IntPtr listener);
-            [DllImport("screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void register_did_recognize_command_callback(IntPtr listener, drc_callback cb);
 
             #endregion

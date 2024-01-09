@@ -17,13 +17,13 @@ namespace CrossSpeak
             }
         }
 
-        [DllImport("screen-reader-libs/linux/libspeechdwrapper.so")]
+        [DllImport("lib/screen-reader-libs/linux/libspeechdwrapper.so")]
         internal static extern int Initialize();
 
-        [DllImport("screen-reader-libs/linux/libspeechdwrapper.so")]
+        [DllImport("lib/screen-reader-libs/linux/libspeechdwrapper.so")]
         internal static extern int Speak(GoString text, bool interrupt);
 
-        [DllImport("screen-reader-libs/linux/libspeechdwrapper.so")]
+        [DllImport("lib/screen-reader-libs/linux/libspeechdwrapper.so")]
         internal static extern int Close();
     }
 

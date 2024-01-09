@@ -113,6 +113,14 @@ namespace CrossSpeak
 
         public bool IsSpeaking() => isLoaded && Tolk.IsSpeaking();
 
+        public float GetVolume() => 0.0f;
+
+        public void SetVolume(float volume) { }
+
+        public float GetRate() => 0.0f;
+
+        public void SetRate(float rate) { }
+
         public bool Silence() => isLoaded && Tolk.Silence();
 
         public void Close()

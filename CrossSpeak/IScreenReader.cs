@@ -16,6 +16,14 @@
 
         public bool IsSpeaking();
 
+        public float GetVolume();
+
+        public void SetVolume(float volume);
+
+        public float GetRate();
+
+        public void SetRate(float rate);
+
         public void TrySAPI(bool trySAPI);
 
         public void PreferSAPI(bool preferSAPI);

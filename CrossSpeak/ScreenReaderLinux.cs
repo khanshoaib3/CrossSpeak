@@ -71,6 +71,14 @@ namespace CrossSpeak
 
         public bool IsLoaded() => _initialized;
 
+        public float GetVolume() => 0.0f;
+
+        public void SetVolume(float volume) { }
+
+        public float GetRate() => 0.0f;
+
+        public void SetRate(float rate) { }
+
         public string? DetectScreenReader() => null;
 
         public bool HasSpeech() => false;

@@ -148,15 +148,11 @@ namespace CrossSpeak
             rt = new Thread(new ParameterizedThreadStart(SpeakLoop));
             rt.Start(cts.Token);
             LibSpeakAPI.register_did_finish_speaking_callback(speaker, fscb);
-            LibSpeakAPI.set_rate_with(speaker, 1.0f);
         }
 
         public bool IsLoaded() => speaker != IntPtr.Zero;
 
-        public string? DetectScreenReader()
-        {
-            throw new NotImplementedException();
-        }
+        public string? DetectScreenReader() => null;
 
         public bool HasSpeech() => IsLoaded();
 
@@ -185,6 +181,14 @@ namespace CrossSpeak
         public bool Output(string text, bool interrupt) => Speak(text, interrupt);
 
         public bool IsSpeaking() => LibSpeakAPI.is_speaking(speaker) && speechQueue.Count != 0;
+
+        public float GetVolume() => IsLoaded() ? LibSpeakAPI.get_volume_with(speaker) : 0.0f;
+
+        public void SetVolume(float volume) { if (IsLoaded()) LibSpeakAPI.set_volume_with(speaker, volume); }
+
+        public float GetRate() => IsLoaded() ? LibSpeakAPI.get_rate_with(speaker) : 0.0f;
+
+        public void SetRate(float rate) { if (IsLoaded()) LibSpeakAPI.set_rate_with(speaker, rate); }
 
         public void TrySAPI(bool trySAPI) { }
 

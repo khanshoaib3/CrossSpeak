@@ -143,6 +143,8 @@ namespace CrossSpeak
 
         public void Initialize()
         {
+            if (IsLoaded()) Close();
+
             Console.WriteLine("Initializing screen reader...");
             speaker = LibSpeakAPI.make_speaker();
             rt = new Thread(new ParameterizedThreadStart(SpeakLoop));
@@ -178,7 +180,7 @@ namespace CrossSpeak
             return true;
         }
 
-        public bool Output(string text, bool interrupt) => Speak(text, interrupt);
+        public bool Output(string text, bool interrupt) => Speak(text, interrupt) || Braille(text);
 
         public bool IsSpeaking() => LibSpeakAPI.is_speaking(speaker) && speechQueue.Count != 0;
 

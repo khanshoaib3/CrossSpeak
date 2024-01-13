@@ -33,6 +33,8 @@ namespace CrossSpeak
 
         public void Initialize()
         {
+            if (IsLoaded()) Close();
+         
             Console.WriteLine("Initializing speech dispatcher...");
             
             int res = LibSpeechdWrapperAPI.Initialize();
@@ -81,7 +83,7 @@ namespace CrossSpeak
 
         public string? DetectScreenReader() => null;
 
-        public bool HasSpeech() => false;
+        public bool HasSpeech() => IsLoaded();
 
         public bool Output(string text, bool interrupt) => Speak(text, interrupt) || Braille(text);
 

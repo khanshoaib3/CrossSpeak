@@ -25,6 +25,8 @@ namespace CrossSpeak
 
         public void Initialize()
         {
+            if (isLoaded) Close();
+
             Console.WriteLine("Initializing Tolk...");
             Tolk.Load();
 

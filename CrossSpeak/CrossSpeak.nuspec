@@ -13,10 +13,6 @@
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2024</copyright>
     <tags>tts screen-reader nvda sapi jaws accessibility</tags>
-	<dependencies>
-		<dependency id="Microsoft.Extensions.Logging" version="8.0.0" />
-		<dependency id="Microsoft.Extensions.Logging.Console" version="8.0.0" />
-	</dependencies>
 	<references>
 		<reference file="CrossSpeak.dll"/>
 		<reference file="TolkDotNet.dll"/>

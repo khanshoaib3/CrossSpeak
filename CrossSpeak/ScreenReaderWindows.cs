@@ -17,7 +17,6 @@ namespace CrossSpeak
             string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
             if (assemblyDirectory == string.Empty) return;
             string dllDirectory = Path.Combine(assemblyDirectory, "lib", "screen-reader-libs", "windows");
-            Logger.LogTrace($"Dll directory set to: {dllDirectory}");
             SetDllDirectory(dllDirectory);
         }
 
@@ -25,21 +24,10 @@ namespace CrossSpeak
         {
             if (isLoaded) Close();
 
-            Logger.LogDebug("Initializing Tolk...");
             Tolk.Load();
 
-            Logger.LogTrace("Querying for the active screen reader driver...");
             string name = Tolk.DetectScreenReader();
-            if (name != null)
-            {
-                Logger.LogInfo($"The active screen reader driver is: {name}");
-                isLoaded = true;
-            }
-            else
-            {
-                Logger.LogError("None of the supported screen readers is running");
-                isLoaded = false;
-            }
+            isLoaded = name != null;
         }
 
         public bool IsLoaded() => isLoaded && Tolk.IsLoaded();
@@ -59,18 +47,7 @@ namespace CrossSpeak
             if (string.IsNullOrWhiteSpace(text)) return false;
             if (!isLoaded) return false;
 
-            if (Tolk.Speak(text, interrupt))
-            {
-#if DEBUG
-                Logger.LogTrace($"Speak(interrupt: {interrupt}) = {text}");
-#endif
-                return true;
-            }
-            else
-            {
-                Logger.LogError($"Failed to output text: {text}");
-                return false;
-            }
+            return Tolk.Speak(text, interrupt);
         }
 
         public bool Braille(string text)
@@ -78,18 +55,7 @@ namespace CrossSpeak
             if (string.IsNullOrWhiteSpace(text)) return false;
             if (!isLoaded) return false;
 
-            if (Tolk.Braille(text))
-            {
-#if DEBUG
-                Logger.LogTrace($"Braille: {text}");
-#endif
-                return true;
-            }
-            else
-            {
-                Logger.LogError($"Failed to output text: {text}");
-                return false;
-            }
+            return Tolk.Braille(text);
         }
 
         public bool Output(string text, bool interrupt = false)
@@ -97,18 +63,7 @@ namespace CrossSpeak
             if (string.IsNullOrWhiteSpace(text)) return false;
             if (!isLoaded) return false;
 
-            if (Tolk.Output(text, interrupt))
-            {
-#if DEBUG
-                Logger.LogTrace($"Output(interrupt: {interrupt}) = {text}");
-#endif
-                return true;
-            }
-            else
-            {
-                Logger.LogError($"Failed to output text: {text}");
-                return false;
-            }
+            return Tolk.Output(text, interrupt);
         }
 
         public bool IsSpeaking() => isLoaded && Tolk.IsSpeaking();
@@ -129,7 +84,6 @@ namespace CrossSpeak
 
             Tolk.Unload();
             isLoaded = false;
-            Logger.LogTrace("Closed the screen reader driver");
         }
     }
 }

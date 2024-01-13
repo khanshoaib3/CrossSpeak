@@ -34,17 +34,13 @@ namespace CrossSpeak
         {
             if (IsLoaded()) Close();
          
-            Logger.LogDebug("Initializing speech dispatcher for linux...");
-            
             int res = LibSpeechdWrapperAPI.Initialize();
             if (res == 1)
             {
                 _initialized = true;
-                Logger.LogInfo("Successfully initialized.");
             }
             else
             {
-                Logger.LogError("Unable to initialize.");
             }
         }
 
@@ -56,18 +52,7 @@ namespace CrossSpeak
             LibSpeechdWrapperAPI.GoString str = new LibSpeechdWrapperAPI.GoString(text, text.Length);
             int re = LibSpeechdWrapperAPI.Speak(str, interrupt);
 
-            if (re == 1)
-            {
-#if DEBUG
-                Logger.LogTrace($"Speak(interrupt: {interrupt}) = {text}");
-#endif
-                return true;
-            }
-            else
-            {
-                Logger.LogError($"Failed to speak text: {text}");
-                return false;
-            }
+            return re == 1;
         }
 
         public bool IsLoaded() => _initialized;
@@ -103,7 +88,6 @@ namespace CrossSpeak
             if (!_initialized) return;
             LibSpeechdWrapperAPI.Close();
             _initialized = false;
-            Logger.LogTrace("Closed speech dispatcher");
         }
     }
 }

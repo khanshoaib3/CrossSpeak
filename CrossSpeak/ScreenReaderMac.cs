@@ -145,12 +145,10 @@ namespace CrossSpeak
         {
             if (IsLoaded()) Close();
 
-            Logger.LogDebug("Initializing screen reader...");
             speaker = LibSpeakAPI.make_speaker();
             rt = new Thread(new ParameterizedThreadStart(SpeakLoop));
             rt.Start(cts.Token);
             LibSpeakAPI.register_did_finish_speaking_callback(speaker, fscb);
-            Logger.LogTrace("Successfully initialized!");
         }
 
         public bool IsLoaded() => speaker != IntPtr.Zero;
@@ -163,10 +161,6 @@ namespace CrossSpeak
         {
             if (text == null) return false;
             if (string.IsNullOrWhiteSpace(text)) return false;
-
-#if DEBUG
-            Logger.LogTrace($"Speak(interrupt: {interrupt}) = {text}");
-#endif
 
             if (interrupt)
             {
@@ -209,7 +203,6 @@ namespace CrossSpeak
             rt?.Join();
             cts.Dispose();
             LibSpeakAPI.cleanup_with(speaker);
-            Logger.LogTrace("Closed the screen reader driver");
         }
     }
 }

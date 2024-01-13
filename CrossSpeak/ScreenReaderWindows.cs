@@ -1,9 +1,7 @@
 ﻿using DavyKager;
-using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CrossSpeak
 {
@@ -19,7 +17,7 @@ namespace CrossSpeak
             string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
             if (assemblyDirectory == string.Empty) return;
             string dllDirectory = Path.Combine(assemblyDirectory, "lib", "screen-reader-libs", "windows");
-            // Call SetDllDirectory to change the DLL search path
+            Logger.LogTrace($"Dll directory set to: {dllDirectory}");
             SetDllDirectory(dllDirectory);
         }
 
@@ -27,19 +25,19 @@ namespace CrossSpeak
         {
             if (isLoaded) Close();
 
-            Console.WriteLine("Initializing Tolk...");
+            Logger.LogDebug("Initializing Tolk...");
             Tolk.Load();
 
-            Console.WriteLine("Querying for the active screen reader driver...");
+            Logger.LogTrace("Querying for the active screen reader driver...");
             string name = Tolk.DetectScreenReader();
             if (name != null)
             {
-                Console.WriteLine($"The active screen reader driver is: {name}");
+                Logger.LogInfo($"The active screen reader driver is: {name}");
                 isLoaded = true;
             }
             else
             {
-                Console.WriteLine("None of the supported screen readers is running");
+                Logger.LogError("None of the supported screen readers is running");
                 isLoaded = false;
             }
         }
@@ -64,13 +62,13 @@ namespace CrossSpeak
             if (Tolk.Speak(text, interrupt))
             {
 #if DEBUG
-                Console.WriteLine($"Speaking(interrupt: {interrupt}) = {text}");
+                Logger.LogTrace($"Speak(interrupt: {interrupt}) = {text}");
 #endif
                 return true;
             }
             else
             {
-                Console.WriteLine($"Failed to output text: {text}");
+                Logger.LogError($"Failed to output text: {text}");
                 return false;
             }
         }
@@ -83,13 +81,13 @@ namespace CrossSpeak
             if (Tolk.Braille(text))
             {
 #if DEBUG
-                Console.WriteLine($"Braille: {text}");
+                Logger.LogTrace($"Braille: {text}");
 #endif
                 return true;
             }
             else
             {
-                Console.WriteLine($"Failed to output text: {text}");
+                Logger.LogError($"Failed to output text: {text}");
                 return false;
             }
         }
@@ -102,13 +100,13 @@ namespace CrossSpeak
             if (Tolk.Output(text, interrupt))
             {
 #if DEBUG
-                Console.WriteLine($"Speaking(interrupt: {interrupt}) = {text}");
+                Logger.LogTrace($"Output(interrupt: {interrupt}) = {text}");
 #endif
                 return true;
             }
             else
             {
-                Console.WriteLine($"Failed to output text: {text}");
+                Logger.LogError($"Failed to output text: {text}");
                 return false;
             }
         }
@@ -131,6 +129,7 @@ namespace CrossSpeak
 
             Tolk.Unload();
             isLoaded = false;
+            Logger.LogTrace("Closed the screen reader driver");
         }
     }
 }

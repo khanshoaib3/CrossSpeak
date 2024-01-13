@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace CrossSpeak
 {
@@ -35,17 +34,17 @@ namespace CrossSpeak
         {
             if (IsLoaded()) Close();
          
-            Console.WriteLine("Initializing speech dispatcher...");
+            Logger.LogDebug("Initializing speech dispatcher for linux...");
             
             int res = LibSpeechdWrapperAPI.Initialize();
             if (res == 1)
             {
                 _initialized = true;
-                Console.WriteLine("Successfully initialized.");
+                Logger.LogInfo("Successfully initialized.");
             }
             else
             {
-                Console.WriteLine("Unable to initialize.");
+                Logger.LogError("Unable to initialize.");
             }
         }
 
@@ -60,13 +59,13 @@ namespace CrossSpeak
             if (re == 1)
             {
 #if DEBUG
-                Console.WriteLine($"Speaking(interrupt: {interrupt}) = {text}");
+                Logger.LogTrace($"Speak(interrupt: {interrupt}) = {text}");
 #endif
                 return true;
             }
             else
             {
-                Console.WriteLine($"Failed to output text: {text}");
+                Logger.LogError($"Failed to speak text: {text}");
                 return false;
             }
         }
@@ -104,6 +103,7 @@ namespace CrossSpeak
             if (!_initialized) return;
             LibSpeechdWrapperAPI.Close();
             _initialized = false;
+            Logger.LogTrace("Closed speech dispatcher");
         }
     }
 }

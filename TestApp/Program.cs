@@ -9,6 +9,7 @@ internal class Program
         CrossSpeakManager.Instance.Initialize();
         CrossSpeakManager.Instance.Output("Hello!");
         CrossSpeakManager.Instance.Speak("There!", false);
+        Console.WriteLine(CrossSpeakManager.Instance.DetectScreenReader());
         CrossSpeakManager.Instance.Close();
     }
 }

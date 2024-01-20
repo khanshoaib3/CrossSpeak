@@ -65,7 +65,7 @@ namespace CrossSpeak
 
         public void SetRate(float rate) { }
 
-        public string? DetectScreenReader() => null;
+        public string DetectScreenReader() => null;
 
         public bool HasSpeech() => IsLoaded();
 

@@ -53,7 +53,7 @@ namespace CrossSpeak
             [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern IntPtr make_speaker();
             [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl)]
-            internal static extern void speak_with(IntPtr speaker, [MarshalAs(UnmanagedType.LPUTF8Str)] String text);
+            internal static extern void speak_with(IntPtr speaker, [MarshalAs(UnmanagedType.LPStr)] String text);
             [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
             internal static extern void set_voice_with(IntPtr speaker, Int32 index);
             [DllImport("lib/screen-reader-libs/macos/libspeak.dylib", CallingConvention = CallingConvention.Cdecl)]
@@ -115,14 +115,14 @@ namespace CrossSpeak
         private static IntPtr speaker;
         //Stuff for the runloop thread
         private readonly CancellationTokenSource cts = new CancellationTokenSource();
-        private Thread? rt;
+        private Thread rt;
         //Speech queue for interrupt
         private static readonly Queue<string> speechQueue = new Queue<string>();
 
         // DidFinishSpeaking callback for interrupt
         readonly dfs_callback fscb = new dfs_callback(DoneSpeaking);
 
-        private static void SpeakLoop(object? obj)
+        private static void SpeakLoop(object obj)
         {
             if (obj == null) return;
 
@@ -153,7 +153,7 @@ namespace CrossSpeak
 
         public bool IsLoaded() => speaker != IntPtr.Zero;
 
-        public string? DetectScreenReader() => null;
+        public string DetectScreenReader() => null;
 
         public bool HasSpeech() => IsLoaded();
 

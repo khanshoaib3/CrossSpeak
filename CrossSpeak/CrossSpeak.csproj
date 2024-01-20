@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <!--<Nullable>enable</Nullable>-->
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Cross Speak</Title>
 	<NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
+	<PackageReadmeFile></PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>

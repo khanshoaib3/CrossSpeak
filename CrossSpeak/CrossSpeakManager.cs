@@ -5,7 +5,7 @@ namespace CrossSpeak
 {
     public class CrossSpeakManager
     {
-        private static IScreenReader? _instance;
+        private static IScreenReader _instance;
 
         public static IScreenReader Instance
         {

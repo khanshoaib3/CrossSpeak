@@ -36,7 +36,7 @@ namespace CrossSpeak
 
         public void PreferSAPI(bool preferSAPI) => Tolk.PreferSAPI(preferSAPI);
 
-        public string? DetectScreenReader() => isLoaded ? Tolk.DetectScreenReader() : null;
+        public string DetectScreenReader() => isLoaded ? Tolk.DetectScreenReader() : null;
 
         public bool HasSpeech() => isLoaded && Tolk.HasSpeech();
 

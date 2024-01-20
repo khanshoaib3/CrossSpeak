@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>CrossSpeak</id>
+    <id>TOWK.Utility.CrossSpeak</id>
     <version>1.0.0</version>
     <title>Cross Speak</title>
-    <authors>Mohammad Shoaib Khan</authors>
+    <authors>TheOneWhoKnocks</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <!-- <icon>icon.png</icon> -->
     <projectUrl>https://github.com/khanshoaib3/CrossSpeak/</projectUrl>
     <description>A cross platform screen reader interfacing libraray.</description>
-    <tags>tts screen-reader nvda sapi jaws accessibility</tags>
+    <tags>tts screen-reader nvda sapi jaws accessibility text-to-speech</tags>
+	<readme>docs\README.md</readme>
+	<license type="file">LICENSE.txt</license>
 	<references>
 		<reference file="CrossSpeak.dll"/>
 		<reference file="TolkDotNet.dll"/>
@@ -25,6 +26,8 @@
 	<file src="lib\linux\*.*" target="contentFiles\any\any\lib\screen-reader-libs\linux" />
 	<file src="lib\macos\*.*" target="contentFiles\any\any\lib\screen-reader-libs\macos" />
 	<file src="lib\TolkDotNet.dll" target="lib\netstandard2.0" />
+	<file src="..\README.md" target="docs\" />
+	<file src="..\LICENSE.txt" target="" />
 	<file src="bin\Debug\netstandard2.0\CrossSpeak.dll" target="lib\netstandard2.0" />
 	<!--<file src="bin\Release\netstandard2.0\CrossSpeak.dll" target="lib\netstandard2.0" />-->
   </files>

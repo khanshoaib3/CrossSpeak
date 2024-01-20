@@ -2,15 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <!--<Nullable>enable</Nullable>-->
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Cross Speak</Title>
+	<Description>A cross platform screen reader interfacing libraray.</Description>
 	<NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
-	<PackageReadmeFile></PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
 	<Reference Include="lib/TolkDotNet.dll" />
   </ItemGroup>
+  
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="lib\linux\libspeechdwrapper.so" DestinationFolder="$(OutDir)lib\screen-reader-libs\linux" />
+    <Copy SourceFiles="lib\windows\nvdaControllerClient64.dll" DestinationFolder="$(OutDir)lib\screen-reader-libs\windows" />
+    <Copy SourceFiles="lib\windows\SAAPI64.dll" DestinationFolder="$(OutDir)lib\screen-reader-libs\windows" />
+    <Copy SourceFiles="lib\windows\Tolk.dll" DestinationFolder="$(OutDir)lib\screen-reader-libs\windows" />
+    <Copy SourceFiles="lib\macos\libspeak.dylib" DestinationFolder="$(OutDir)lib\screen-reader-libs\macos" />
+  </Target>
 
 </Project>

@@ -141,7 +141,7 @@ namespace CrossSpeak
             LibSpeakAPI.speak_with(speaker, speechQueue.Dequeue());
         }
 
-        public void Initialize()
+        public bool Initialize()
         {
             if (IsLoaded()) Close();
 
@@ -149,6 +149,8 @@ namespace CrossSpeak
             rt = new Thread(new ParameterizedThreadStart(SpeakLoop));
             rt.Start(cts.Token);
             LibSpeakAPI.register_did_finish_speaking_callback(speaker, fscb);
+
+            return true;
         }
 
         public bool IsLoaded() => speaker != IntPtr.Zero;

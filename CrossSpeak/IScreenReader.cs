@@ -6,7 +6,8 @@
         /// Loads and initializes the active screen reader.<br/>
         /// Re-intializes if it has already been loaded.
         /// </summary>
-        void Initialize();
+        /// <returns>true if the screen reader was successfully loaded otherwise false.</returns>
+        bool Initialize();
 
         /// <summary>
         /// [Windows and mac only] To check if a screen reader has been loaded or not. <br/>

@@ -20,7 +20,7 @@ namespace CrossSpeak
             SetDllDirectory(dllDirectory);
         }
 
-        public void Initialize()
+        public bool Initialize()
         {
             if (isLoaded) Close();
 
@@ -28,6 +28,8 @@ namespace CrossSpeak
 
             string name = Tolk.DetectScreenReader();
             isLoaded = name != null;
+
+            return isLoaded;
         }
 
         public bool IsLoaded() => isLoaded && Tolk.IsLoaded();

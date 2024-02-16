@@ -30,18 +30,14 @@ namespace CrossSpeak
     {
         private bool _initialized;
 
-        public void Initialize()
+        public bool Initialize()
         {
             if (IsLoaded()) Close();
          
-            int res = LibSpeechdWrapperAPI.Initialize();
-            if (res == 1)
-            {
-                _initialized = true;
-            }
-            else
-            {
-            }
+            int re = LibSpeechdWrapperAPI.Initialize();
+            _initialized = re == 1;
+
+            return _initialized;
         }
 
         public bool Speak(string text, bool interrupt = true)

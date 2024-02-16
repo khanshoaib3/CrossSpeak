@@ -11,24 +11,23 @@ namespace CrossSpeak
         {
             get
             {
-                if (_instance == null)
+                if (_instance != null) return _instance;
+                
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    {
-                        _instance = new ScreenReaderWindows();
-                    }
-                    else if (RuntimeInformation.IsOSPlatform (OSPlatform.Linux))
-                    {
-                        _instance = new ScreenReaderLinux();
-                    }
-                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                    {
-                        _instance = new ScreenReaderMac();
-                    }
-                    else
-                    {
-                        throw new Exception("Platform not supported!!");
-                    }
+                    _instance = new ScreenReaderWindows();
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    _instance = new ScreenReaderLinux();
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    _instance = new ScreenReaderMac();
+                }
+                else
+                {
+                    throw new Exception("Platform not supported!!");
                 }
 
                 return _instance;
